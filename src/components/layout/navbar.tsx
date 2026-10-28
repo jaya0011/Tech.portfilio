@@ -79,7 +79,7 @@ export function Navbar() {
         <nav
           aria-label="Primary"
           className={cn(
-            "flex w-full max-w-6xl items-center justify-between gap-4 rounded-full py-2 pr-2 pl-4 transition-all duration-500",
+            "flex w-full max-w-[calc(var(--container-page)-3rem)] items-center justify-between gap-4 rounded-full py-2 pr-2 pl-4 transition-all duration-500",
             scrolled ? "shadow-soft glass-strong" : "border border-transparent",
           )}
         >

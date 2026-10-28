@@ -16,7 +16,7 @@ const icons: Record<Service["icon"], LucideIcon> = {
 export function Services() {
   return (
     <section id="services" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="mx-auto max-w-page px-5 sm:px-8 lg:px-10">
         <SectionHeading
           index="03"
           eyebrow="Services"

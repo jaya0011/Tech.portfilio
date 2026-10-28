@@ -13,7 +13,7 @@ export function Process() {
 
   return (
     <section id="process" className="relative py-24 sm:py-32">
-      <div className="mx-auto grid max-w-6xl gap-14 px-5 sm:px-8 lg:grid-cols-[1fr_1.2fr]">
+      <div className="mx-auto grid max-w-page gap-14 px-5 sm:px-8 lg:grid-cols-[1fr_1.2fr] lg:px-10 xl:gap-20">
         <div className="lg:sticky lg:top-32 lg:self-start">
           <SectionHeading
             index="05"

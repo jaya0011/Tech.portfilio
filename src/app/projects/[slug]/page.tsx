@@ -59,7 +59,7 @@ export default async function ProjectPage({ params }: Props) {
         style={{ background: `linear-gradient(135deg, ${project.accent.from}, ${project.accent.to})` }}
       />
 
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="mx-auto max-w-page px-5 sm:px-8 lg:px-10">
         <Reveal>
           <Link href="/#work" className="group inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-fg">
             <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" /> All projects

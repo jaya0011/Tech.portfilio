@@ -39,7 +39,7 @@ function Marquee() {
 export function Skills() {
   return (
     <section id="skills" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="mx-auto max-w-page px-5 sm:px-8 lg:px-10">
         <SectionHeading
           index="02"
           eyebrow="Tech stack"

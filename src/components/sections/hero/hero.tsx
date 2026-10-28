@@ -88,7 +88,7 @@ export function Hero() {
       id="home"
       aria-label="Introduction"
       onPointerMove={trackSpotlight}
-      className="group/hero relative isolate pt-32 pb-16 sm:pt-40 lg:pt-44"
+      className="group/hero relative isolate pt-28 pb-16 sm:pt-32 lg:pt-28"
     >
       {/* Cursor spotlight */}
       <div
@@ -99,7 +99,7 @@ export function Hero() {
             "radial-gradient(600px circle at var(--sx, 50%) var(--sy, 30%), color-mix(in oklab, var(--accent) 12%, transparent), transparent 65%)",
         }}
       />
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-5 sm:px-8 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
+      <div className="mx-auto grid max-w-page grid-cols-1 items-center gap-16 px-5 sm:px-8 lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:px-10 xl:gap-16">
         <motion.div style={{ y: textY, opacity: fade }}>
           <motion.div {...fadeUp(0.1)} className="flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium glass">
@@ -114,11 +114,11 @@ export function Hero() {
             </span>
           </motion.div>
 
-          <motion.p {...fadeUp(0.2)} className="mt-8 font-mono text-sm text-muted">
+          <motion.p {...fadeUp(0.2)} className="mt-6 font-mono text-sm text-muted lg:mt-7">
             <span className="text-accent">{"//"}</span> Hi, I&apos;m <span className="text-fg">{siteConfig.name}</span>
           </motion.p>
 
-          <h1 className="mt-4 text-[2.6rem] leading-[1.02] font-semibold tracking-[-0.035em] text-balance sm:text-6xl lg:text-[4.1rem]">
+          <h1 className="mt-4 text-[2.6rem] leading-[1.02] font-semibold tracking-[-0.035em] text-balance sm:text-6xl lg:text-[4.1rem] xl:text-[4.6rem]">
             <SplitText
               animateOnMount
               delay={0.3}
@@ -138,7 +138,7 @@ export function Hero() {
             {hero.intro}
           </motion.p>
 
-          <motion.div {...fadeUp(1)} className="mt-9 flex flex-wrap items-center gap-3">
+          <motion.div {...fadeUp(1)} className="mt-8 flex flex-wrap items-center gap-3">
             <ButtonLink href="/#work" size="lg">
               Explore my work
               <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -166,7 +166,7 @@ export function Hero() {
             </div>
           </motion.div>
 
-          <motion.div {...fadeUp(1.15)} className="mt-10">
+          <motion.div {...fadeUp(1.15)} className="mt-8">
             <Link
               href={hero.currentlyBuilding.href}
               className="group inline-flex max-w-full items-center gap-3 rounded-2xl p-1.5 pr-4 glass transition-colors hover:border-line-strong"
@@ -192,7 +192,7 @@ export function Hero() {
       </div>
 
       {/* Stats */}
-      <div className="mx-auto mt-20 max-w-6xl px-5 sm:px-8">
+      <div className="mx-auto mt-16 max-w-page px-5 sm:px-8 lg:px-10">
         <motion.dl
           {...fadeUp(1.3)}
           className="grid grid-cols-2 divide-line overflow-hidden rounded-3xl glass md:grid-cols-4 md:divide-x"

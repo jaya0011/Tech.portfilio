@@ -34,7 +34,7 @@ const socials = [
 export function Footer() {
   return (
     <footer className="relative mt-24 border-t border-line">
-      <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8">
+      <div className="mx-auto max-w-page px-5 py-14 sm:px-8 lg:px-10">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <Link href="/" className="inline-flex items-center gap-2.5 font-semibold">

@@ -71,7 +71,7 @@ export function DeviceShowcase() {
   const current = featured[index];
 
   return (
-    <div className="relative mx-auto w-full max-w-[640px]">
+    <div className="relative mx-auto w-full max-w-[640px] xl:max-w-[700px]">
       <div className="relative [perspective:1800px]" onPointerMove={onMove} onPointerLeave={onLeave}>
         {/* Glow behind devices — tinted by the project on screen */}
         <div

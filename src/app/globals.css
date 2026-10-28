@@ -46,6 +46,8 @@
   --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
 
+  --container-page: 84rem;
+
   --color-bg: var(--bg);
   --color-elevated: var(--bg-elevated);
   --color-fg: var(--fg);

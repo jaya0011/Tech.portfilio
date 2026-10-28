@@ -62,7 +62,7 @@ function CopyEmail() {
 export function Contact() {
   return (
     <section id="contact" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="mx-auto max-w-page px-5 sm:px-8 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
           <div>
             <SectionHeading
