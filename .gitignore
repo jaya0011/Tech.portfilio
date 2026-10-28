@@ -7,7 +7,6 @@
 /build
 
 # env files
-.env*
 !.env.example
 
 # misc
@@ -19,3 +18,8 @@ next-env.d.ts
 
 # private content notes (source for src/data/portfolio.ts)
 details.md
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
+config.bat

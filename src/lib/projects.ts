@@ -27,3 +27,7 @@ export function similarProjects(project: Project, count = 3) {
     .slice(0, count)
     .map(({ p }) => p);
 }
+
+export function projectBySlug(slug: string) {
+  return projects.find((p) => p.slug === slug);
+}

@@ -37,38 +37,44 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const picks: Record<SectionId, { title: string; caption: string; icon: React.ReactNode; gradient: string }> = {
+const picks: Record<SectionId, { title: string; caption: string; icon: React.ReactNode; gradient: string; image?: string }> = {
   projects: {
+    image: "/projects/mr-veg.webp",
     title: "Projects",
     caption: `${projects.length} titles · web, mobile & ecommerce`,
     icon: <Clapperboard />,
     gradient: "linear-gradient(135deg,#e50914,#4a0306)",
   },
   skills: {
+    image: "/projects/first-rank.webp",
     title: "Skills",
     caption: "Next.js · NestJS · PostgreSQL · React Native",
     icon: <Code2 />,
     gradient: "linear-gradient(135deg,#2f6fed,#0a1a40)",
   },
   about: {
+    image: "/projects/global-hrbook.webp",
     title: "Experience",
     caption: "Freelance developer · MSc CS · BCA",
     icon: <Briefcase />,
     gradient: "linear-gradient(135deg,#8e44ad,#250a33)",
   },
   services: {
+    image: "/projects/dentist-pitampura.webp",
     title: "Services",
     caption: "Web apps, mobile apps, stores & more",
     icon: <Layers />,
     gradient: "linear-gradient(135deg,#e5b80b,#4a3200)",
   },
   process: {
+    image: "/projects/mendingminds.webp",
     title: "How I Work",
     caption: processSteps.map((s) => s.title).join(" → "),
     icon: <Workflow />,
     gradient: "linear-gradient(135deg,#2ea043,#082611)",
   },
   contact: {
+    image: "/projects/electric-marshmallow.webp",
     title: "Hire Me",
     caption: "Usually replies within 24–48 hours",
     icon: <Send />,
@@ -156,7 +162,7 @@ export default async function BrowsePage({ params }: Props) {
   return (
     <TitleModalProvider>
       <Billboard profile={profile} />
-      <div className="relative z-10 -mt-14 space-y-4 sm:-mt-24 sm:space-y-6 lg:-mt-36">
+      <div className="relative z-10 -mt-16 space-y-8 sm:-mt-24 sm:space-y-12 lg:-mt-32">
         {profile.rows.map((r) => (
           <Fragment key={r}>{rows[r]}</Fragment>
         ))}

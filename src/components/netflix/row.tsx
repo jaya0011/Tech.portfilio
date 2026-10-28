@@ -50,15 +50,18 @@ export function Row({ title, id, size = "md", className, children }: RowProps) {
   };
 
   const arrow =
-    "absolute inset-y-4 z-20 hidden w-[var(--gutter)] min-w-8 items-center justify-center bg-black/50 text-white opacity-0 transition-opacity group-hover/row:opacity-100 hover:bg-black/70 focus-visible:opacity-100 sm:flex disabled:pointer-events-none disabled:!opacity-0";
+    "absolute inset-y-5 z-20 hidden w-[var(--gutter)] min-w-8 items-center justify-center bg-black/50 text-white opacity-0 transition-opacity group-hover/row:opacity-100 hover:bg-black/70 focus-visible:opacity-100 sm:flex disabled:pointer-events-none disabled:!opacity-0";
 
   return (
     <section
       id={id}
-      className={cn("group/row [container-type:inline-size] relative [--gap:0.5rem] [--gutter:max(1rem,4cqw)]", className)}
+      className={cn(
+        "group/row [container-type:inline-size] relative [--gap:0.625rem] [--gutter:max(1rem,4cqw)] sm:[--gap:0.875rem]",
+        className,
+      )}
     >
       <div className="flex items-end justify-between px-gutter">
-        <h2 className="group/title flex items-baseline gap-2 text-lg font-bold text-[#e5e5e5] sm:text-xl lg:text-[1.4vw] xl:text-2xl">
+        <h2 className="group/title flex items-baseline gap-2 text-xl font-bold tracking-tight text-[#e5e5e5] sm:text-2xl xl:text-[1.75rem]">
           {title}
         </h2>
         {page.count > 1 && (
@@ -84,7 +87,7 @@ export function Row({ title, id, size = "md", className, children }: RowProps) {
           ref={track}
           onScroll={measure}
           className={cn(
-            "no-scrollbar flex snap-x snap-mandatory [scroll-padding-inline:var(--gutter)] gap-[var(--gap)] overflow-x-auto overscroll-x-contain px-gutter py-4",
+            "no-scrollbar flex snap-x snap-mandatory [scroll-padding-inline:var(--gutter)] gap-[var(--gap)] overflow-x-auto overflow-y-hidden overscroll-x-contain px-gutter py-5",
             sizes[size],
           )}
         >
