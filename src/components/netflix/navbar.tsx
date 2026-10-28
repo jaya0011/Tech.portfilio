@@ -8,7 +8,8 @@ import { navLinks, profiles, siteConfig } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { ProfileAvatar, Wordmark } from "./brand";
-import { rememberProfile, useProfile } from "./use-profile";
+import { ProfileLoader, useProfileSwitch } from "./profile-loader";
+import { useProfile } from "./use-profile";
 
 /** Closes a dropdown on outside click or Escape. */
 function useDismiss(open: boolean, close: () => void) {
@@ -44,6 +45,7 @@ const menuMotion = {
 export function Navbar() {
   const profile = useProfile();
   const home = `/browse/${profile.id}`;
+  const { target: switching, select } = useProfileSwitch();
   const scrolled = useSyncExternalStore(
     subscribeScroll,
     () => window.scrollY > 8,
@@ -155,8 +157,8 @@ export function Navbar() {
                         <li key={p.id}>
                           <Link
                             href={`/browse/${p.id}`}
-                            onClick={() => {
-                              rememberProfile(p.id);
+                            onClick={(e) => {
+                              select(e, p);
                               setProfileOpen(false);
                             }}
                             className="group/item flex items-center gap-3 px-3 py-1.5 text-[#e5e5e5]"
@@ -197,6 +199,7 @@ export function Navbar() {
           </div>
         </div>
       </nav>
+      {switching && <ProfileLoader profile={switching} />}
     </header>
   );
 }

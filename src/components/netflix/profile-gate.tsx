@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { profiles } from "@/data/portfolio";
 import { EASE } from "@/lib/utils";
 import { ProfileAvatar } from "./brand";
-import { rememberProfile } from "./use-profile";
+import { ProfileLoader, useProfileSwitch } from "./profile-loader";
 
 const LETTERS = "JAYA".split("");
 const INTRO_MS = 2900;
@@ -15,6 +15,7 @@ const INTRO_MS = 2900;
 export function ProfileGate() {
   const reduce = useReducedMotion();
   const [stage, setStage] = useState<"intro" | "profiles">("intro");
+  const { target, select } = useProfileSwitch();
 
   useEffect(() => {
     if (stage !== "intro") return;
@@ -98,7 +99,7 @@ export function ProfileGate() {
                 >
                   <Link
                     href={`/browse/${p.id}`}
-                    onClick={() => rememberProfile(p.id)}
+                    onClick={(e) => select(e, p)}
                     className="group flex flex-col items-center gap-3 rounded-md outline-none"
                   >
                     <span className="block rounded-[6%] ring-white transition-shadow group-hover:ring-[3px] group-focus-visible:ring-[3px]">
@@ -117,6 +118,7 @@ export function ProfileGate() {
           </motion.section>
         )}
       </AnimatePresence>
+      {target && <ProfileLoader profile={target} />}
     </div>
   );
 }
