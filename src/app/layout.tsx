@@ -86,7 +86,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       data-scroll-behavior="smooth"
       className={`${geist.variable} ${instrument.variable} ${jetbrains.variable}`}
     >
-      <body className="min-h-dvh overflow-x-clip">
+      {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla) inject attributes into <body> */}
+      <body className="min-h-dvh overflow-x-clip" suppressHydrationWarning>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Providers>
           <ScrollProgress />

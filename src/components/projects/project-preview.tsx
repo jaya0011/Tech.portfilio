@@ -6,7 +6,16 @@ import { cn } from "@/lib/utils";
  * Stylised, code-drawn UI previews for each project, framed in a browser window.
  * Everything scales with container-query units so previews stay crisp at any size.
  */
-export function ProjectPreview({ project, className }: { project: Project; className?: string }) {
+export function ProjectPreview({
+  project,
+  className,
+  fill = false,
+}: {
+  project: Project;
+  className?: string;
+  /** Stretch to fill the parent's height instead of using a fixed 16:10 body. */
+  fill?: boolean;
+}) {
   const { from, to } = project.accent;
   const host = project.url ? new URL(project.url).host : `${project.slug}.app`;
 
@@ -15,6 +24,7 @@ export function ProjectPreview({ project, className }: { project: Project; class
       aria-hidden="true"
       className={cn(
         "[container-type:inline-size] relative overflow-hidden rounded-2xl border border-line bg-[#0c0d12] shadow-soft",
+        fill && "flex h-full flex-col",
         className,
       )}
       style={{ "--pa": from, "--pb": to } as React.CSSProperties}
@@ -28,7 +38,7 @@ export function ProjectPreview({ project, className }: { project: Project; class
           {host}
         </div>
       </div>
-      <div className="relative aspect-[16/10] text-[1.9cqw] text-white">
+      <div className={cn("relative text-[1.9cqw] text-white", fill ? "min-h-0 flex-1" : "aspect-[16/10]")}>
         <Body variant={project.preview} title={project.title} />
       </div>
     </div>

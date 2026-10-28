@@ -70,7 +70,7 @@ function tokenize(line: string): { text: string; kind: Kind }[] {
   return out;
 }
 
-export function CodeEditor() {
+export function CodeEditor({ onDeployed }: { onDeployed?: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true });
   const reduce = useReducedMotion();
@@ -111,6 +111,11 @@ export function CodeEditor() {
     const timers = [0, 1, 2, 3].map((i) => setTimeout(() => setTermLines(i + 1), 350 + i * 650));
     return () => timers.forEach(clearTimeout);
   }, [done, reduce]);
+
+  const deployed = shownTerm > TERMINAL.length;
+  useEffect(() => {
+    if (deployed) onDeployed?.();
+  }, [deployed, onDeployed]);
 
   // Render the snippet up to `chars` characters, preserving token colours.
   const rendered = lines.map((tokens, li) => {

@@ -1,7 +1,8 @@
 "use client";
 
 import { AnimatePresence, animate, motion, useInView, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Hammer, MapPin } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { hero, siteConfig } from "@/data/portfolio";
 import { EASE } from "@/lib/utils";
@@ -66,6 +67,14 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.9, ease: EASE, delay },
 });
 
+function trackSpotlight(e: React.PointerEvent<HTMLElement>) {
+  if (e.pointerType !== "mouse") return;
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  el.style.setProperty("--sx", `${e.clientX - r.left}px`);
+  el.style.setProperty("--sy", `${e.clientY - r.top}px`);
+}
+
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -74,8 +83,23 @@ export function Hero() {
   const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} id="home" aria-label="Introduction" className="relative pt-32 pb-16 sm:pt-40 lg:pt-44">
-      <div className="mx-auto grid max-w-6xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
+    <section
+      ref={ref}
+      id="home"
+      aria-label="Introduction"
+      onPointerMove={trackSpotlight}
+      className="group/hero relative isolate pt-32 pb-16 sm:pt-40 lg:pt-44"
+    >
+      {/* Cursor spotlight */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-700 group-hover/hero:opacity-100"
+        style={{
+          background:
+            "radial-gradient(600px circle at var(--sx, 50%) var(--sy, 30%), color-mix(in oklab, var(--accent) 12%, transparent), transparent 65%)",
+        }}
+      />
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-5 sm:px-8 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
         <motion.div style={{ y: textY, opacity: fade }}>
           <motion.div {...fadeUp(0.1)} className="flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium glass">
@@ -140,6 +164,25 @@ export function Hero() {
                 </a>
               ))}
             </div>
+          </motion.div>
+
+          <motion.div {...fadeUp(1.15)} className="mt-10">
+            <Link
+              href={hero.currentlyBuilding.href}
+              className="group inline-flex max-w-full items-center gap-3 rounded-2xl p-1.5 pr-4 glass transition-colors hover:border-line-strong"
+            >
+              <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-gradient-accent text-white">
+                <Hammer className="size-4" />
+              </span>
+              <span className="min-w-0 text-sm">
+                <span className="block font-mono text-[10px] tracking-[0.2em] text-subtle uppercase">Currently building</span>
+                <span className="block truncate">
+                  <span className="font-medium">{hero.currentlyBuilding.title}</span>
+                  <span className="text-muted"> · {hero.currentlyBuilding.description}</span>
+                </span>
+              </span>
+              <ArrowRight className="size-4 shrink-0 text-muted transition-transform group-hover:translate-x-1 group-hover:text-fg" />
+            </Link>
           </motion.div>
         </motion.div>
 

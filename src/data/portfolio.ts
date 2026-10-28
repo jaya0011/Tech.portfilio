@@ -52,6 +52,11 @@ export const hero = {
   roles: ["Full-Stack Developer", "Freelance Engineer", "Next.js Specialist", "Mobile App Developer", "WordPress & PHP Builder"],
   intro:
     "I design, build and ship production-grade web platforms, ecommerce stores and Android & iOS apps — from the first wireframe to the final deploy. Clean architecture, fast interfaces, and backends that scale with your business.",
+  currentlyBuilding: {
+    title: "First Rank",
+    description: "Multi-tenant edtech SaaS for schools",
+    href: "/projects/first-rank",
+  },
   stats: [
     { value: 9, suffix: "+", label: "Products shipped" },
     { value: 20, suffix: "+", label: "Modules in one SaaS" },
