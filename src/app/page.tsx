@@ -1,21 +1,24 @@
-import { About } from "@/components/sections/about";
-import { Contact } from "@/components/sections/contact";
-import { Hero } from "@/components/sections/hero/hero";
-import { Process } from "@/components/sections/process";
-import { Services } from "@/components/sections/services";
-import { Skills } from "@/components/sections/skills";
-import { Work } from "@/components/sections/work";
+import Link from "next/link";
+import { ProfileGate } from "@/components/netflix/profile-gate";
+import { profiles, siteConfig } from "@/data/portfolio";
 
 export default function HomePage() {
   return (
     <>
-      <Hero />
-      <About />
-      <Skills />
-      <Services />
-      <Work />
-      <Process />
-      <Contact />
+      {/* Crawlable summary — the gate itself is an animated client experience. */}
+      <div className="sr-only">
+        <p>
+          {siteConfig.name} — {siteConfig.title}. {siteConfig.description}
+        </p>
+        <nav aria-label="Browse the portfolio">
+          {profiles.map((p) => (
+            <Link key={p.id} href={`/browse/${p.id}`}>
+              Browse as {p.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
+      <ProfileGate />
     </>
   );
 }

@@ -38,32 +38,103 @@ export const siteConfig = {
   },
 } as const;
 
-export const navLinks = [
-  { id: "about", label: "About" },
-  { id: "skills", label: "Stack" },
-  { id: "services", label: "Services" },
-  { id: "work", label: "Work" },
-  { id: "process", label: "Process" },
-  { id: "contact", label: "Contact" },
-] as const;
+/** Anchors on every browse page (`/browse/[profile]`). */
+export type SectionId = "projects" | "skills" | "about" | "services" | "process" | "contact";
 
-export const hero = {
-  status: "Available for freelance projects",
-  roles: ["Full-Stack Developer", "Freelance Engineer", "Next.js Specialist", "Mobile App Developer", "WordPress & PHP Builder"],
-  intro:
-    "I design, build and ship production-grade web platforms, ecommerce stores and Android & iOS apps — from the first wireframe to the final deploy. Clean architecture, fast interfaces, and backends that scale with your business.",
-  currentlyBuilding: {
-    title: "First Rank",
-    description: "Multi-tenant edtech SaaS for schools",
-    href: "/projects/first-rank",
-  },
-  stats: [
-    { value: 9, suffix: "+", label: "Products shipped" },
-    { value: 20, suffix: "+", label: "Modules in one SaaS" },
-    { value: 3, suffix: "", label: "Platforms · Web, iOS, Android" },
-    { value: 100, suffix: "%", label: "Full-stack ownership" },
-  ],
+export const navLinks: { id: SectionId; label: string }[] = [
+  { id: "projects", label: "Projects" },
+  { id: "skills", label: "Skills" },
+  { id: "about", label: "Experience" },
+  { id: "services", label: "Services" },
+  { id: "contact", label: "Hire Me" },
+];
+
+export type ProfileId = "recruiter" | "client" | "developer" | "explorer";
+
+export type RowId = "picks" | "top" | "continue" | "web" | "commerce" | "mobile-ai" | "skills" | "about" | "services" | "process";
+
+export type Profile = {
+  id: ProfileId;
+  name: string;
+  color: string;
+  face: "smile" | "wink" | "shades" | "grin";
+  /** Billboard copy at the top of this profile's browse page. */
+  description: string;
+  /** Section shortcuts in the "Today's Top Picks" row. */
+  picks: SectionId[];
+  /** Order of the rows below the billboard — every profile shows every row, just curated differently. */
+  rows: RowId[];
 };
+
+export const profiles: Profile[] = [
+  {
+    id: "recruiter",
+    name: "Recruiter",
+    color: "#2f6fed",
+    face: "smile",
+    description:
+      "Full-stack developer who owns the whole lifecycle — requirements, UI, APIs, databases and deployment. 9+ products shipped across web, iOS and Android, now pursuing an MSc in Computer Science.",
+    picks: ["about", "skills", "projects", "services", "contact"],
+    rows: ["picks", "top", "about", "skills", "continue", "web", "commerce", "mobile-ai", "services", "process"],
+  },
+  {
+    id: "client",
+    name: "Client",
+    color: "#e50914",
+    face: "grin",
+    description:
+      "I design, build and ship production-grade web platforms, ecommerce stores and Android & iOS apps — from the first wireframe to the final deploy. Clean architecture, fast interfaces, and backends that scale with your business.",
+    picks: ["services", "projects", "process", "about", "contact"],
+    rows: ["picks", "services", "top", "commerce", "web", "process", "mobile-ai", "continue", "about", "skills"],
+  },
+  {
+    id: "developer",
+    name: "Developer",
+    color: "#2ea043",
+    face: "shades",
+    description:
+      "Next.js · NestJS · PostgreSQL · Drizzle · React Native. Multi-tenant, role-aware, type-safe systems — and code the next developer will thank me for.",
+    picks: ["skills", "projects", "about", "process", "contact"],
+    rows: ["picks", "skills", "web", "continue", "top", "mobile-ai", "commerce", "about", "process", "services"],
+  },
+  {
+    id: "explorer",
+    name: "Explorer",
+    color: "#e5b80b",
+    face: "wink",
+    description:
+      "Welcome in! I'm Jaya — I build websites, online stores and mobile apps from Amritsar, India. Grab some popcorn and browse around.",
+    picks: ["projects", "about", "services", "skills", "contact"],
+    rows: ["picks", "continue", "top", "mobile-ai", "web", "commerce", "about", "services", "skills", "process"],
+  },
+];
+
+export const faqs = [
+  {
+    q: "What can you build for me?",
+    a: "Full-stack web apps and SaaS platforms, Android & iOS apps, ecommerce stores, WordPress websites with custom PHP plugins, APIs and databases — plus maintenance and new features for products you already have.",
+  },
+  {
+    q: "Which tech stack do you use?",
+    a: "Mostly Next.js, React and TypeScript on the frontend; NestJS, Node.js and PHP on the backend; PostgreSQL with Drizzle ORM for data; React Native & Expo for mobile; and WordPress for content-driven sites. I pick what fits your project.",
+  },
+  {
+    q: "How does a project with you work?",
+    a: "Four steps — Discover, Design, Build, and Launch & Support. You get regular previews while I build, and I stay on for maintenance and new features after launch.",
+  },
+  {
+    q: "Do you handle both frontend and backend?",
+    a: "Yes. I own the full lifecycle: requirements, UI, APIs, databases, integrations and deployment — all under one roof.",
+  },
+  {
+    q: "Where are you based?",
+    a: "Amritsar, Punjab, India — and I work remotely with clients.",
+  },
+  {
+    q: "How quickly will you reply?",
+    a: "Usually within 24–48 hours. Use the form below, or email me directly.",
+  },
+];
 
 export const about = {
   heading: "Engineer by craft, problem-solver by nature.",
@@ -128,25 +199,6 @@ export const skillGroups: SkillGroup[] = [
     blurb: "The glue that turns a site into a product.",
     items: ["Payment gateways", "Third-party APIs", "Email & notifications", "PDF generation", "Git & GitHub", "Vite"],
   },
-];
-
-export const marqueeTech = [
-  "Next.js",
-  "React",
-  "TypeScript",
-  "Node.js",
-  "NestJS",
-  "PostgreSQL",
-  "Drizzle ORM",
-  "React Native",
-  "Expo",
-  "Tailwind CSS",
-  "Framer Motion",
-  "Three.js",
-  "WordPress",
-  "PHP",
-  "REST APIs",
-  "Git",
 ];
 
 export type Service = {

@@ -10,7 +10,7 @@ import { EASE, cn } from "@/lib/utils";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const fieldBase =
-  "peer w-full rounded-2xl border bg-surface px-4 pt-6 pb-2.5 text-[15px] text-fg outline-none transition-all placeholder:text-transparent focus:border-accent focus:ring-4 focus:ring-[var(--ring)]/20";
+  "peer w-full rounded-[4px] border bg-[#161616]/70 px-4 pt-6 pb-2.5 text-base text-white outline-none transition-all placeholder:text-transparent focus:border-white focus:ring-2 focus:ring-white/40";
 
 function Field({ id, label, error, children }: { id: string; label: string; error?: string; children: React.ReactNode }) {
   return (
@@ -18,7 +18,7 @@ function Field({ id, label, error, children }: { id: string; label: string; erro
       {children}
       <label
         htmlFor={id}
-        className="pointer-events-none absolute top-2 left-4 text-xs text-muted transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-[15px] peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent"
+        className="pointer-events-none absolute top-2 left-4 text-xs text-muted transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#b3b3b3]"
       >
         {label}
       </label>
@@ -86,7 +86,7 @@ export function ContactForm() {
   const describedBy = (k: keyof ContactErrors) => (errors[k] ? `${k}-error` : undefined);
 
   return (
-    <div className="relative overflow-hidden rounded-[2rem] p-6 shadow-soft glass-strong sm:p-8">
+    <div className="relative overflow-hidden rounded-md border border-white/10 bg-black/60 p-6 text-left shadow-soft backdrop-blur-sm sm:p-10">
       <AnimatePresence mode="wait" initial={false}>
         {status === "success" ? (
           <motion.div
@@ -102,7 +102,7 @@ export function ContactForm() {
               initial={{ scale: 0, rotate: -90 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.1 }}
-              className="grid size-16 place-items-center rounded-full bg-gradient-accent text-white shadow-[0_10px_40px_-10px_var(--glow)]"
+              className="grid size-16 place-items-center rounded-full bg-accent text-white shadow-[0_10px_40px_-10px_rgba(229,9,20,0.6)]"
             >
               <CircleCheck className="size-8" />
             </motion.span>
@@ -113,7 +113,7 @@ export function ContactForm() {
             <button
               type="button"
               onClick={() => setStatus("idle")}
-              className="mt-8 text-sm font-medium text-accent underline-offset-4 hover:underline"
+              className="mt-8 text-sm font-medium text-white underline-offset-4 hover:underline"
             >
               Send another message
             </button>
@@ -138,7 +138,7 @@ export function ContactForm() {
                   placeholder="Your name"
                   aria-invalid={!!errors.name}
                   aria-describedby={describedBy("name")}
-                  className={cn(fieldBase, errors.name ? "border-red-500/60" : "border-line")}
+                  className={cn(fieldBase, errors.name ? "border-[#eb3942]" : "border-white/30")}
                 />
               </Field>
               <Field id="email" label="Email address" error={errors.email}>
@@ -150,22 +150,22 @@ export function ContactForm() {
                   placeholder="Email address"
                   aria-invalid={!!errors.email}
                   aria-describedby={describedBy("email")}
-                  className={cn(fieldBase, errors.email ? "border-red-500/60" : "border-line")}
+                  className={cn(fieldBase, errors.email ? "border-[#eb3942]" : "border-white/30")}
                 />
               </Field>
             </div>
 
             <fieldset>
-              <legend className="mb-3 pl-1 text-sm text-muted">What are you looking to build?</legend>
+              <legend className="mb-3 pl-1 text-sm text-[#b3b3b3]">What are you looking to build?</legend>
               <div className="flex flex-wrap gap-2" role="radiogroup">
                 {contactProjectTypes.map((t) => (
                   <label
                     key={t}
                     className={cn(
-                      "cursor-pointer rounded-full border px-3.5 py-2 text-sm transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent",
+                      "cursor-pointer rounded-[4px] border px-3.5 py-2 text-sm transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-white",
                       projectType === t
-                        ? "border-transparent bg-fg text-bg"
-                        : "border-line text-muted hover:border-line-strong hover:text-fg",
+                        ? "border-accent bg-accent text-white"
+                        : "border-white/25 text-[#b3b3b3] hover:border-white/60 hover:text-white",
                     )}
                   >
                     <input
@@ -202,7 +202,7 @@ export function ContactForm() {
                 placeholder="Tell me about your project"
                 aria-invalid={!!errors.message}
                 aria-describedby={describedBy("message")}
-                className={cn(fieldBase, "resize-none pt-7", errors.message ? "border-red-500/60" : "border-line")}
+                className={cn(fieldBase, "resize-none pt-7", errors.message ? "border-[#eb3942]" : "border-white/30")}
               />
             </Field>
 
@@ -235,11 +235,11 @@ export function ContactForm() {
             </AnimatePresence>
 
             <div className="flex flex-col-reverse items-start justify-between gap-4 pt-2 sm:flex-row sm:items-center">
-              <p className="text-xs text-subtle">Usually replies within 24–48 hours.</p>
+              <p className="text-xs text-[#808080]">Usually replies within 24–48 hours.</p>
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="group relative inline-flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-accent px-7 font-medium text-white shadow-[0_10px_40px_-12px_var(--glow)] transition-all hover:-translate-y-0.5 disabled:opacity-70 sm:w-auto"
+                className="group relative inline-flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-[4px] bg-accent px-8 text-lg font-semibold text-white transition-colors hover:bg-accent-hover disabled:opacity-70 sm:w-auto"
               >
                 {status === "submitting" ? (
                   <>

@@ -27,26 +27,3 @@ export function InstagramIcon(props: IconProps) {
     </svg>
   );
 }
-
-export function LogoMark(props: IconProps) {
-  return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" {...props}>
-      <defs>
-        <linearGradient id="logo-g" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop stopColor="var(--accent)" />
-          <stop offset="0.55" stopColor="var(--accent-3)" />
-          <stop offset="1" stopColor="var(--accent-2)" />
-        </linearGradient>
-      </defs>
-      <rect x="1" y="1" width="30" height="30" rx="9" stroke="url(#logo-g)" strokeWidth="2" />
-      <path
-        d="M9.5 11.5 6 16l3.5 4.5M22.5 11.5 26 16l-3.5 4.5"
-        stroke="url(#logo-g)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M16.8 10v8.2a2.8 2.8 0 0 1-5 1.7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
-}

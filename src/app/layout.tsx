@@ -1,10 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Instrument_Serif, JetBrains_Mono } from "next/font/google";
-import { Background } from "@/components/layout/background";
-import { CommandMenu } from "@/components/layout/command-menu";
-import { Footer } from "@/components/layout/footer";
-import { Navbar } from "@/components/layout/navbar";
-import { ScrollProgress } from "@/components/layout/scroll-progress";
+import { Bebas_Neue, Geist, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
 import { siteConfig } from "@/data/portfolio";
 import "./globals.css";
@@ -18,6 +13,7 @@ const instrument = Instrument_Serif({
   display: "swap",
 });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap" });
+const bebas = Bebas_Neue({ subsets: ["latin"], weight: "400", variable: "--font-bebas", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -52,10 +48,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f6f8" },
-    { media: "(prefers-color-scheme: dark)", color: "#06060a" },
-  ],
+  themeColor: "#141414",
+  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
 };
@@ -82,21 +76,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${geist.variable} ${instrument.variable} ${jetbrains.variable}`}
+      className={`dark ${geist.variable} ${instrument.variable} ${jetbrains.variable} ${bebas.variable}`}
     >
       {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla) inject attributes into <body> */}
       <body className="min-h-dvh overflow-x-clip" suppressHydrationWarning>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <Providers>
-          <ScrollProgress />
-          <Background />
-          <Navbar />
-          <CommandMenu />
-          <main id="main">{children}</main>
-          <Footer />
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
