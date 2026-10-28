@@ -58,6 +58,8 @@ export type Profile = {
   name: string;
   color: string;
   face: "smile" | "wink" | "shades" | "grin";
+  /** Project whose screenshot is the billboard backdrop. */
+  backdrop: string;
   /** Billboard copy at the top of this profile's browse page. */
   description: string;
   /** Section shortcuts in the "Today's Top Picks" row. */
@@ -69,6 +71,7 @@ export type Profile = {
 export const profiles: Profile[] = [
   {
     id: "recruiter",
+    backdrop: "first-rank",
     name: "Recruiter",
     color: "#2f6fed",
     face: "smile",
@@ -79,6 +82,7 @@ export const profiles: Profile[] = [
   },
   {
     id: "client",
+    backdrop: "mr-veg",
     name: "Client",
     color: "#e50914",
     face: "grin",
@@ -89,6 +93,7 @@ export const profiles: Profile[] = [
   },
   {
     id: "developer",
+    backdrop: "global-hrbook",
     name: "Developer",
     color: "#2ea043",
     face: "shades",
@@ -99,6 +104,7 @@ export const profiles: Profile[] = [
   },
   {
     id: "explorer",
+    backdrop: "electric-marshmallow",
     name: "Explorer",
     color: "#e5b80b",
     face: "wink",
@@ -160,41 +166,49 @@ export type SkillGroup = {
   icon: "frontend" | "backend" | "database" | "mobile" | "cms" | "tooling";
   blurb: string;
   items: string[];
+  /** Files in /public/tech shown as app-icon tiles. */
+  logos: string[];
 };
 
 export const skillGroups: SkillGroup[] = [
   {
     title: "Frontend",
+    logos: ["react", "nextjs", "typescript", "tailwindcss"],
     icon: "frontend",
     blurb: "Pixel-perfect, responsive interfaces with modern React.",
     items: ["React.js", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Framer Motion", "Three.js", "HTML5 & CSS3"],
   },
   {
     title: "Backend",
+    logos: ["nodejs", "nestjs", "php"],
     icon: "backend",
     blurb: "Robust APIs and server logic that stay maintainable.",
     items: ["Node.js", "NestJS", "PHP", "REST APIs", "Auth & RBAC", "Nodemailer"],
   },
   {
     title: "Database",
+    logos: ["postgresql"],
     icon: "database",
     blurb: "Well-modelled data with type-safe access.",
     items: ["PostgreSQL", "Drizzle ORM", "Schema design", "Data integration"],
   },
   {
     title: "Mobile",
+    logos: ["react", "android", "apple"],
     icon: "mobile",
     blurb: "One codebase, native-feeling apps on iOS & Android.",
     items: ["React Native", "Expo", "Android", "iOS"],
   },
   {
     title: "CMS & Ecommerce",
+    logos: ["wordpress", "php"],
     icon: "cms",
     blurb: "Content-driven sites and stores that convert.",
     items: ["WordPress", "Headless WordPress", "Custom PHP plugins", "Cart & checkout", "Order management"],
   },
   {
     title: "Integrations & Tooling",
+    logos: ["git", "github", "vitejs"],
     icon: "tooling",
     blurb: "The glue that turns a site into a product.",
     items: ["Payment gateways", "Third-party APIs", "Email & notifications", "PDF generation", "Git & GitHub", "Vite"],
@@ -206,41 +220,49 @@ export type Service = {
   icon: "web" | "mobile" | "ecommerce" | "wordpress" | "api" | "maintenance";
   description: string;
   points: string[];
+  /** Project whose screenshot illustrates this service. */
+  showcase: string;
 };
 
 export const services: Service[] = [
   {
     title: "Full-Stack Web Apps",
+    showcase: "first-rank",
     icon: "web",
     description: "Custom web applications, dashboards and SaaS platforms built end-to-end with a modern, type-safe stack.",
     points: ["Next.js + NestJS / Node", "Role-based access", "Admin dashboards"],
   },
   {
     title: "Android & iOS Apps",
+    showcase: "global-hrbook",
     icon: "mobile",
     description: "Cross-platform mobile apps with React Native & Expo that share logic and APIs with your web product.",
     points: ["React Native + Expo", "Shared backend APIs", "Store-ready builds"],
   },
   {
     title: "Ecommerce Development",
+    showcase: "mr-veg",
     icon: "ecommerce",
     description: "High-converting online stores with product discovery, cart, checkout, payments, shipping and order tracking.",
     points: ["Headless storefronts", "Payment gateways", "Shipping integrations"],
   },
   {
     title: "WordPress & Custom PHP Plugins",
+    showcase: "dentist-pitampura",
     icon: "wordpress",
     description: "Business websites on WordPress, extended with custom PHP plugins built precisely for your workflow.",
     points: ["Custom plugins", "Headless WordPress", "Easy content editing"],
   },
   {
     title: "API & Database Engineering",
+    showcase: "mendingminds",
     icon: "api",
     description: "Clean REST APIs, third-party integrations and well-designed PostgreSQL schemas that scale with you.",
     points: ["REST API design", "PostgreSQL + Drizzle", "Auth, email & PDFs"],
   },
   {
     title: "Maintenance & Growth",
+    showcase: "electric-marshmallow",
     icon: "maintenance",
     description: "Ongoing improvements, new features, performance tuning and bug fixes for websites and apps you already have.",
     points: ["Feature upgrades", "Performance fixes", "Reliable support"],
@@ -320,6 +342,8 @@ export type Project = {
   note?: string;
   accent: { from: string; to: string };
   preview: PreviewVariant;
+  /** Screenshot of the live site in /public/projects; falls back to the drawn preview. */
+  image?: string;
 };
 
 export const projectFilters: { id: "all" | ProjectFilter; label: string }[] = [
@@ -376,6 +400,7 @@ export const projects: Project[] = [
   },
   {
     slug: "global-hrbook",
+    image: "/projects/global-hrbook.webp",
     title: "Global HRBook",
     type: "HR Management SaaS (Web + Mobile)",
     tagline: "A multi-role HRMS with 20+ modules — attendance, leave, payroll and expenses on web and mobile.",
@@ -409,6 +434,7 @@ export const projects: Project[] = [
   },
   {
     slug: "mendingminds",
+    image: "/projects/mendingminds.webp",
     title: "MendingMinds",
     type: "Therapy & Mental Wellness Platform",
     tagline: "Connecting clients and therapists with bookings, therapy plans, check-ins and PDF reports.",
@@ -441,6 +467,7 @@ export const projects: Project[] = [
   },
   {
     slug: "first-rank",
+    image: "/projects/first-rank.webp",
     title: "First Rank",
     type: "Education & School Management SaaS",
     tagline: "A multi-tenant edtech platform for schools, teachers and parents — with AI on the roadmap.",
@@ -510,6 +537,7 @@ export const projects: Project[] = [
   },
   {
     slug: "mr-veg",
+    image: "/projects/mr-veg.webp",
     title: "Mr.Veg",
     type: "Food Brand & Franchise Website",
     tagline: "A WordPress site for a spice brand and its smart vending-machine franchise.",
@@ -534,6 +562,7 @@ export const projects: Project[] = [
   },
   {
     slug: "dentist-pitampura",
+    image: "/projects/dentist-pitampura.webp",
     title: "Dentist Pitampura",
     type: "Dental Clinic Website",
     tagline: "A trustworthy clinic website that turns visitors into booked appointments.",
@@ -558,6 +587,7 @@ export const projects: Project[] = [
   },
   {
     slug: "electric-marshmallow",
+    image: "/projects/electric-marshmallow.webp",
     title: "Electric Marshmallow",
     type: "Film Production Studio Website",
     tagline: "A cinematic home for an independent film studio, its productions and its values.",

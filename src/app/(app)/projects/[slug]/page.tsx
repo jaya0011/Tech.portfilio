@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects, siteConfig } from "@/data/portfolio";
 import { genres, matchScore, similarProjects } from "@/lib/projects";
+import { Artwork, Backdrop } from "@/components/netflix/artwork";
 import { JBadge, Meta, TopTenBadge, nfButton } from "@/components/netflix/brand";
 import { ProfileLink } from "@/components/netflix/profile-link";
 import { ProjectPreview } from "@/components/projects/project-preview";
@@ -55,16 +56,21 @@ export default async function ProjectPage({ params }: Props) {
       {/* Hero */}
       <header className="relative flex min-h-[620px] items-end overflow-hidden pt-24 pb-14 sm:h-[85svh] sm:pb-20">
         <div aria-hidden="true" className="absolute inset-0">
-          <div className="absolute top-[10%] -right-[10%] w-[100%] [perspective:1800px] sm:top-[8%] sm:-right-[4%] sm:w-[68%]">
-            <div className="origin-[70%_40%] animate-billboard">
-              <ProjectPreview project={project} className="[transform:rotateY(-14deg)_rotateX(6deg)]" />
+          {project.image ? (
+            <Backdrop src={project.image} />
+          ) : (
+            <div className="absolute top-[10%] -right-[10%] w-[100%] [perspective:1800px] sm:top-[8%] sm:-right-[4%] sm:w-[68%]">
+              <div className="origin-[70%_40%] animate-billboard">
+                <ProjectPreview project={project} className="[transform:rotateY(-14deg)_rotateX(6deg)]" />
+              </div>
             </div>
-          </div>
+          )}
           <div
             className="absolute top-[10%] right-[10%] size-[40vw] rounded-full opacity-25 blur-[120px]"
             style={{ background: accent }}
           />
-          <div className="absolute inset-0 bg-[linear-gradient(77deg,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.6)_42%,rgba(0,0,0,0.05)_85%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,#141414_0%,rgba(20,20,20,0.93)_30%,rgba(20,20,20,0.55)_58%,rgba(20,20,20,0.1)_100%)]" />
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/80 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-[#141414] to-transparent" />
         </div>
 
@@ -196,10 +202,10 @@ export default async function ProjectPage({ params }: Props) {
                 className="group block h-full overflow-hidden rounded-[4px] bg-[#2f2f2f] transition-colors hover:bg-[#3a3a3a]"
               >
                 <span className="relative block aspect-video overflow-hidden">
-                  <ProjectPreview
+                  <Artwork
                     project={p}
-                    fill
-                    className="h-full rounded-none border-0 shadow-none transition-transform duration-500 group-hover:scale-105"
+                    sizes="(min-width: 640px) 33vw, 100vw"
+                    className="transition-transform duration-500 group-hover:scale-105"
                   />
                   <span className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                   <span className="absolute bottom-2 left-3 font-display text-2xl leading-none text-white">{p.title}</span>

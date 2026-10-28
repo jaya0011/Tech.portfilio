@@ -7,7 +7,7 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState } f
 import { projects, siteConfig, type Project } from "@/data/portfolio";
 import { genres, matchScore, similarProjects } from "@/lib/projects";
 import { EASE } from "@/lib/utils";
-import { ProjectPreview } from "@/components/projects/project-preview";
+import { Artwork } from "./artwork";
 import { JBadge, Meta, TopTenBadge, nfButton } from "./brand";
 
 const OpenTitleContext = createContext<(slug: string) => void>(() => {});
@@ -90,8 +90,8 @@ function TitleModal({ project, onClose, onOpen }: { project: Project; onClose: (
 
         {/* Artwork */}
         <div className="relative aspect-video">
-          <ProjectPreview project={project} fill className="h-full rounded-none border-0 shadow-none" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-[#181818]/55 to-black/10" />
+          <Artwork project={project} sizes="(min-width: 850px) 850px, 100vw" priority className="brightness-[0.6]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-[#181818]/60 to-black/20" />
           <div className="absolute right-[5%] bottom-[6%] left-[5%]">
             <p className="flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.35em] text-[#ddd] uppercase">
               <JBadge className="text-2xl tracking-normal" /> Project
@@ -205,7 +205,7 @@ function TitleModal({ project, onClose, onOpen }: { project: Project; onClose: (
                   className="group block h-full w-full overflow-hidden rounded-[4px] bg-[#2f2f2f] text-left transition-colors hover:bg-[#3a3a3a]"
                 >
                   <span className="relative block aspect-video">
-                    <ProjectPreview project={p} fill className="h-full rounded-none border-0 shadow-none" />
+                    <Artwork project={p} sizes="(min-width: 640px) 270px, 100vw" />
                     <span className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                     <span className="absolute bottom-2 left-3 font-display text-2xl leading-none text-white">{p.title}</span>
                   </span>

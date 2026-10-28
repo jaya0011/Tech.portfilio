@@ -40,6 +40,7 @@
   --color-match: var(--match);
 
   --animate-billboard: billboard 32s ease-in-out infinite alternate;
+  --animate-blink: blink 1.1s step-end infinite;
 }
 
 /* ---------- Base ---------- */
@@ -107,6 +108,12 @@
   }
   to {
     transform: scale(1.12) translate3d(-4%, -3%, 0);
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
 }
 
